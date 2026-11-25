@@ -39,3 +39,39 @@ void heap_push(t_dongle *dongle, int coder_id, long priority)
             break;
     }
 }
+
+void heap_pop(t_dongle *dongle)
+{
+    int i;
+    int smallest;
+    int left;
+    int right;
+
+    if (dongle->heap_size <= 0)
+        return ;
+    dongle->heap_size--;
+    dongle->heap[0] = dongle->heap[dongle->heap_size];
+
+    left = 0;
+    right = 0;
+    i = 0;
+    while (1)
+    {
+        smallest = i;
+        left = 2 * i + 1;
+        right = 2 * i + 2;
+        if (left < dongle->heap_size && 
+            is_higher(dongle->heap[left], dongle->heap[smallest]))
+                smallest = left;
+        if (right < dongle->heap_size &&
+            is_higher(dongle->heap[right], dongle->heap[smallest]))
+                smallest = right;
+        if (smallest == i)
+            break ;
+        else
+        {
+            swap_nodes(&dongle->heap[i], &dongle->heap[smallest]);
+            i = smallest;
+        }
+    }
+}
