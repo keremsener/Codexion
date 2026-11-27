@@ -47,3 +47,12 @@ long	get_time_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
+int	is_sim_over(t_sim *sim)
+{
+	int	over;
+
+	pthread_mutex_lock(&sim->sim_mutex);
+	over = sim->is_over;
+	pthread_mutex_unlock(&sim->sim_mutex);
+	return (over);
+}
