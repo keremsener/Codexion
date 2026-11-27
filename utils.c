@@ -10,6 +10,9 @@
 /*                                                                         */
 /* *********************************************************************** */
 
+#include "codexion.h"
+
+
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -35,3 +38,12 @@ int	ft_atoi(const char *str)
 	}
 	return (result * minus);
 }
+
+long	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+

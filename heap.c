@@ -10,6 +10,8 @@
 /*                                                                         */
 /* *********************************************************************** */
 
+#include "codexion.h"
+
 static int is_higher(t_node a, t_node b)
 {
     if (a.priority < b.priority)
@@ -64,8 +66,6 @@ void heap_pop(t_dongle *dongle)
     dongle->heap_size--;
     dongle->heap[0] = dongle->heap[dongle->heap_size];
 
-    left = 0;
-    right = 0;
     i = 0;
     while (1)
     {
