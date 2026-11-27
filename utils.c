@@ -56,3 +56,17 @@ int	is_sim_over(t_sim *sim)
 	pthread_mutex_unlock(&sim->sim_mutex);
 	return (over);
 }
+
+
+void	smart_sleep(long duration_ms, t_sim *sim)
+{
+	long	start;
+
+	start = get_time_ms();
+	while (get_time_ms() - start < duration_ms)
+	{
+		if (is_sim_over(sim))
+			break ;
+		usleep(500);
+	}
+}
