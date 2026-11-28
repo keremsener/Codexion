@@ -70,3 +70,11 @@ void	smart_sleep(long duration_ms, t_sim *sim)
 		usleep(500);
 	}
 }
+
+void	print_status(t_sim *sim, int coder_id, char *status, int is_burnout)
+{
+	pthread_mutex_lock(&sim->print_mutex);
+	if (!is_sim_over(sim) || is_burnout)
+		printf("%ld %d %s\n", get_time_ms() - sim->start_time, coder_id, status);
+	pthread_mutex_unlock(&sim->print_mutex);
+}
