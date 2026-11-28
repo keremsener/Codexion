@@ -2,14 +2,14 @@
 
 long priority_calculate(t_sim *sim, t_coder *coder)
 {
+    long    value;
+
     if (sim->is_edf == 1)
     {
-        coder->last_compile + sim->burnout_time;
     	pthread_mutex_lock(&sim->sim_mutex);
+        value = coder->last_compile + sim->burnout_time;
+        pthread_mutex_unlock(&sim->sim_mutex);
+        return (value);
     }
-    else if (sim->is_edf == 0)
-    {
-        return (get_time_ms());
-    }
-    return (-1);
+    return (get_time_ms());
 }
